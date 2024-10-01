@@ -23,18 +23,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       # Runs a single command using the runners shell
-      - name: Echo and sleep 15s
-        run: |
-          echo Hello
-          sleep 15
-          echo slept 15s
+      - name: Test echo
+        run: echo Hello
 
       # Runs a set of commands using the runners shell
-      - name: Echo and sleep 30s
+      - name: Print directory and files
         run: |
-          echo Next run
-          sleep 30
-          echo slept 30s
+          pwd
+          ls -lrt
+          g++ -std=c++17 hello.cpp -o hello
+          ./hello
