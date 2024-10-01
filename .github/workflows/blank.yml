@@ -24,6 +24,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+        with:
+          ref: feature1
 
       # Runs a single command using the runners shell
       - name: Test echo
@@ -36,3 +38,4 @@ jobs:
           ls -lrt
           g++ -std=c++17 hello.cpp -o hello
           ./hello
+          ls -lrt
