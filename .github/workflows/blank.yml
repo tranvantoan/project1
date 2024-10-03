@@ -36,7 +36,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Print directory and files
         env:
-          SOURCE_DIR: ${{ env::GITHUB_WORKSPACE }}
+          SOURCE_DIR: ${{ env:GITHUB_WORKSPACE }}
         run: |
           echo "SOURCE_DIR is: $SOURCE_DIR"
           echo TEST
