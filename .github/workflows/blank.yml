@@ -49,6 +49,8 @@ jobs:
           ./hello
           touch testfile.sh
           chmod 755 testfile.sh
+          TEST_WS=${pwd}
+          echo $TEST_WS
           ls -lrt
       # Tag version
       - name: Tag version
