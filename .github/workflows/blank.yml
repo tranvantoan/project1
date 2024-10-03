@@ -35,8 +35,10 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Print directory and files
+        env:
+          SOURCE_DIR: $GITHUB_WORKSPACE
         run: |
-          pwd
+          echo $SOURCE_DIR
           ls -lrt
           g++ -std=c++17 hello.cpp -o hello
           ./hello
