@@ -47,6 +47,8 @@ jobs:
           ls -lrt
           g++ -std=c++17 hello.cpp -o hello
           ./hello
+          touch testfile.sh
+          chmod 755 testfile.sh
           ls -lrt
       # Tag version
       - name: Tag version
