@@ -14,6 +14,11 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  workflow_call: 
+    inputs:
+      name:
+        required: true
+        type: string
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,41 +30,39 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-        with:
-          ref: feature1
+      # - uses: actions/checkout@v4
+      #   with:
+      #     ref: feature1
 
       # Runs a single command using the runners shell
       - name: Test echo
-        run: echo Hello
+        run: echo Hello ${{ inputs.name }}
 
-      # Runs a set of commands using the runners shell
-      - name: Print directory and files
-        env:
-          SOURCE_DIR: ${{ env:GITHUB_WORKSPACE }}
-        run: |
-          echo "SOURCE_DIR is: $SOURCE_DIR"
-          echo TEST
-          DIR=$GITHUB_WORKSPACE
-          echo $DIR
-          echo ORI
-          echo $GITHUB_WORKSPACE
-          ls -lrt
-          g++ -std=c++17 hello.cpp -o hello
-          ./hello
-          touch testfile.sh
-          chmod 755 testfile.sh
-          TEST_WS=${pwd}
-          echo $TEST_WS
-          ls -lrt
-      # Tag version
-      - name: Tag version
-        run: |
-          echo "SOURCE_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-          echo "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          echo "SOURCE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      - name: Build image
-        run: |
-          echo $SOURCE_NAME
-          echo $SOURCE_BRANCH
-          echo $SOURCE_TAG
+      # # Runs a set of commands using the runners shell
+      # - name: Print directory and files
+      #   run: |
+      #     echo "SOURCE_DIR is: $SOURCE_DIR"
+      #     echo TEST
+      #     DIR=$GITHUB_WORKSPACE
+      #     echo $DIR
+      #     echo ORI
+      #     echo $GITHUB_WORKSPACE
+      #     ls -lrt
+      #     g++ -std=c++17 hello.cpp -o hello
+      #     ./hello
+      #     touch testfile.sh
+      #     chmod 755 testfile.sh
+      #     TEST_WS=${pwd}
+      #     echo $TEST_WS
+      #     ls -lrt
+      # # Tag version
+      # - name: Tag version
+      #   run: |
+      #     echo "SOURCE_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      #     echo "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      #     echo "SOURCE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      # - name: Build image
+      #   run: |
+      #     echo $SOURCE_NAME
+      #     echo $SOURCE_BRANCH
+      #     echo $SOURCE_TAG
