@@ -1,0 +1,31 @@
+name: Merge code
+on:
+  workflow_dispatch:
+    inputs:
+      Branch:
+        description: Branch to merge to master
+        default: feature1
+        required: true
+        type: string
+jobs:
+    merge:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: checkout source code
+          uses: actions/checkout@v4
+          with:
+            ref: master
+            path: master
+
+        - name: merge code
+          uses: devmasx/merge-branch@1.4.0
+          with:
+            type: now
+            from_branch: feature1
+            target_branch: master
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+        
+
+          
+      
