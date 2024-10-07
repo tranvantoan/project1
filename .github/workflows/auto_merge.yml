@@ -7,6 +7,12 @@ on:
         default: feature1
         required: true
         type: string
+      Name:
+        description: Select name
+        type: choice
+        options:
+          - Toan
+          - Tran
 jobs:
     merge:
       runs-on: ubuntu-latest
