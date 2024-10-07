@@ -13,6 +13,11 @@ on:
         options:
           - Toan
           - Tran
+      Print_tag:
+        description: Print to STDOUT
+        required: true
+        type: boolean
+        
 jobs:
     merge:
       runs-on: ubuntu-latest
