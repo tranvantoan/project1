@@ -1,0 +1,10 @@
+name: Test self-hosted runner
+on:
+  workflow_dispatch:
+jobs:
+  greeting:
+    runs-on: self-hosted
+    steps:
+      - name: print to screen
+        run:
+          echo "Hello Toan"
