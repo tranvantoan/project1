@@ -2,25 +2,25 @@ name: Merge code
 on:
   workflow_dispatch:
     inputs:
-      Branch:
+      branch:
         description: Branch to merge to master
-        default: feature1
-        required: true
         type: string
-      Name:
-        description: Select name
-        type: choice
-        options:
-          - Toan
-          - Tran
-      Print_tag:
-        description: Print to STDOUT
         required: true
-        type: boolean
-      environment:
-        description: Choose environment
-        required: true
-        type: environment
+        default: feature1  
+      # Name:
+      #   description: Select name
+      #   type: choice
+      #   options:
+      #     - Toan
+      #     - Tran
+      # Print_tag:
+      #   description: Print to STDOUT
+      #   required: true
+      #   type: boolean
+      # environment:
+      #   description: Choose environment
+      #   required: true
+      #   type: environment
         
 jobs:
     merge:
@@ -37,7 +37,7 @@ jobs:
           uses: devmasx/merge-branch@1.4.0
           with:
             type: now
-            from_branch: feature1
+            from_branch: ${{ inputs.branch }}
             target_branch: master
             github_token: ${{ secrets.GITHUB_TOKEN }}
         
