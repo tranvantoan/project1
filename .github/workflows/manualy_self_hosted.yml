@@ -5,6 +5,6 @@ jobs:
   greeting:
     runs-on: self-hosted
     steps:
-      - name: print to screen
-        run:
-          echo "Hello Toan"
+      - uses: actions/checkout@v4
+        with:
+          ref: feature1
