@@ -34,12 +34,19 @@ jobs:
             path: master
 
         - name: merge code
+          id: merge_code
           uses: devmasx/merge-branch@1.4.0
           with:
             type: now
             from_branch: ${{ inputs.branch }}
             target_branch: master
             github_token: ${{ secrets.GITHUB_TOKEN }}
+        - name: OutputOK
+          if: steps.merge_code.outcome == 'success'
+          run: echo "OK"
+        - name: OutputNOOK
+          if: steps.merge_code.outcome == 'failure'
+          run: echo "NOT OK"
         
 
           
