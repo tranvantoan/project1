@@ -41,6 +41,7 @@ jobs:
             from_branch: ${{ inputs.branch }}
             target_branch: master
             github_token: ${{ secrets.GITHUB_TOKEN }}
+          continue-on-error: true
         - name: OutputOK
           if: steps.merge_code.outcome == 'success'
           run: echo "OK"
