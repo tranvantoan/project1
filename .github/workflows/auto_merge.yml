@@ -21,7 +21,8 @@ on:
       #   description: Choose environment
       #   required: true
       #   type: environment
-        
+env:
+  TEST: abc
 jobs:
     merge:
       runs-on: ubuntu-latest
