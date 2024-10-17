@@ -44,11 +44,15 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
           continue-on-error: true
         - name: OutputOK
-          if: steps.merge_code.outcome == 'success'
+          if: steps.merge_code.outputs.merged == 'true'
           run: echo "OK"
         - name: OutputNOOK
-          if: steps.merge_code.outcome == 'failure'
-          run: echo "NOT OK"
+          if: steps.merge_code.outputs.merged == 'false'
+          run: | 
+            echo "NOT OK"
+            echo "Message: ${{ steps.merge_branch.outputs.message }}"
+            echo "merged: ${{ steps.merge_branch.outputs.merged }}"
+            echo "outcome: ${{ steps.merge_branch.outcome }}"
         
 
           
