@@ -36,12 +36,14 @@ jobs:
 
         - name: merge code
           id: merge_code
-          uses: devmasx/merge-branch@1.4.0
-          with:
-            type: now
-            from_branch: ${{ inputs.branch }}
-            target_branch: master
-            github_token: ${{ secrets.GITHUB_TOKEN }}
+          # uses: devmasx/merge-branch@1.4.0
+          # with:
+          #   type: now
+          #   from_branch: ${{ inputs.branch }}
+          #   target_branch: master
+          #   github_token: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            exit 1
           continue-on-error: true
         - name: Print output
           run: | 
