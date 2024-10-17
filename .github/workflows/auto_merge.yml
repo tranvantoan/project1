@@ -46,10 +46,10 @@ jobs:
         - name: Print output
           run: | 
             echo "NOT OK"
-            echo "Message: ${{ steps.merge_branch.outputs.message }}"
-            echo "merged: ${{ steps.merge_branch.outputs.merged }}"
-            echo "outputs: ${{ steps.merge_branch.outputs }}"
-            echo "outcome: ${{ steps.merge_branch.outcome }}"
+            echo "Message: ${{ steps.merge_code.outputs.message }}"
+            echo "merged: ${{ steps.merge_code.outputs.merged }}"
+            echo "outputs: ${{ steps.merge_code.outputs }}"
+            echo "outcome: ${{ steps.merge_code.outcome }}"
         - name: OutputOK
           if: steps.merge_code.outcome == 'true'
           run: echo "OK"
