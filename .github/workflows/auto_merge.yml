@@ -48,7 +48,7 @@ jobs:
             echo "NOT OK"
             echo "Message: ${{ steps.merge_code.outputs.message }}"
             echo "merged: ${{ steps.merge_code.outputs.merged }}"
-            echo "outputs: ${{ steps.merge_code.outputs }}"
+            echo "outputs: ${{ toJSON(steps.merge_code.outputs) }}"
             echo "outcome: ${{ steps.merge_code.outcome }}"
         - name: OutputOK
           if: steps.merge_code.outcome == 'true'
