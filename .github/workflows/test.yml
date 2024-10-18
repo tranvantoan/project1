@@ -1,0 +1,24 @@
+name: test
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  TEST:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Get Latest Tag
+        id: get_tag
+        # You may pin to the exact commit or the version.
+        # uses: WyriHaximus/github-action-get-previous-tag@04e8485ecb6487243907e330d522ff60f02283ce
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+      - name: Print the tag
+        run: |
+          echo "Tag is: ${{ steps.get_tag.outputs.tag }}"
+          
