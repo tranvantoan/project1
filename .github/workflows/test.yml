@@ -49,7 +49,7 @@ jobs:
           echo "STATUS=NOT OK" >> $GITHUB_ENV
       - name: Update something
         run: |
-          echo "ID is: ${{ ID }} , STATUS: ${{ STATUS }}"
+          echo "ID is: ${{ env.ID }} , STATUS: ${{ env.STATUS }}"
       # - uses: olegtarasov/get-tag@v2.1.3
       #   id: tagName
 
