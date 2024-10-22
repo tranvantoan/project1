@@ -32,7 +32,7 @@ jobs:
           echo "tagname: ${{ steps.tagName.outputs.tag }}"
           echo "tag from variable: $GIT_TAG_NAME"
   TEST2:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
       - name: Just echo
         run: |
