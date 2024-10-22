@@ -33,35 +33,37 @@ jobs:
           with:
             ref: master
             path: master
-
-        - name: merge code
-          id: merge_code
-          # uses: devmasx/merge-branch@1.4.0
-          # with:
-          #   type: now
-          #   from_branch: ${{ inputs.branch }}
-          #   target_branch: master
-          #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        - name: Echo some data
           run: |
-            exit 1
-          continue-on-error: true
-        - name: Print output
-          run: | 
-            echo "NOT OK"
-            echo "Message: ${{ steps.merge_code.outputs.message }}"
-            echo "merged: ${{ steps.merge_code.outputs.merged }}"
-            echo "outputs: ${{ toJSON(steps.merge_code.outputs) }}"
-            echo "outcome: ${{ steps.merge_code.outcome }}"
-        - name: OutputOK
-          if: steps.merge_code.outcome == 'true'
-          run: echo "OK"
-        - name: OutputNOOK
-          if: steps.merge_code.outputs.merged == 'false'
-          run: | 
-            echo "NOT OK"
-            echo "Message: ${{ steps.merge_branch.outputs.message }}"
-            echo "merged: ${{ steps.merge_branch.outputs.merged }}"
-            echo "outcome: ${{ steps.merge_branch.outcome }}"
+            echo "TEST and workspace is: $TEST$GITHUB_WORKSPACE"
+        # - name: merge code
+        #   id: merge_code
+        #   # uses: devmasx/merge-branch@1.4.0
+        #   # with:
+        #   #   type: now
+        #   #   from_branch: ${{ inputs.branch }}
+        #   #   target_branch: master
+        #   #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        #   run: |
+        #     exit 1
+        #   continue-on-error: true
+        # - name: Print output
+        #   run: | 
+        #     echo "NOT OK"
+        #     echo "Message: ${{ steps.merge_code.outputs.message }}"
+        #     echo "merged: ${{ steps.merge_code.outputs.merged }}"
+        #     echo "outputs: ${{ toJSON(steps.merge_code.outputs) }}"
+        #     echo "outcome: ${{ steps.merge_code.outcome }}"
+        # - name: OutputOK
+        #   if: steps.merge_code.outcome == 'true'
+        #   run: echo "OK"
+        # - name: OutputNOOK
+        #   if: steps.merge_code.outputs.merged == 'false'
+        #   run: | 
+        #     echo "NOT OK"
+        #     echo "Message: ${{ steps.merge_branch.outputs.message }}"
+        #     echo "merged: ${{ steps.merge_branch.outputs.merged }}"
+        #     echo "outcome: ${{ steps.merge_branch.outcome }}"
         
 
           
