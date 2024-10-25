@@ -16,6 +16,7 @@ jobs:
     env:
       ID: 1
       STATUS: "OK"
+      TARGET_ID: ${{ env.ID }}
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout
@@ -35,6 +36,7 @@ jobs:
         id: dosomething
         continue-on-error: true
         run: |
+          echo "Value of TARGET_ID: ${{ env.TARGET_ID }}"
           exit ${{ inputs.status }}
 
       - name: Handle OK
