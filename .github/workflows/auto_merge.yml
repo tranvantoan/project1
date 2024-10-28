@@ -7,20 +7,20 @@ on:
         type: string
         required: true
         default: feature1  
-      # Name:
-      #   description: Select name
-      #   type: choice
-      #   options:
-      #     - Toan
-      #     - Tran
-      # Print_tag:
-      #   description: Print to STDOUT
-      #   required: true
-      #   type: boolean
-      # environment:
-      #   description: Choose environment
-      #   required: true
-      #   type: environment
+      Name:
+        description: Select name
+        type: choice
+        options:
+          - Toan
+          - Tran
+      Print_tag:
+        description: Print to STDOUT
+        required: true
+        type: boolean
+      environment:
+        description: Choose environment
+        required: true
+        type: environment
 env:
   TEST: abc
 jobs:
