@@ -11,7 +11,7 @@ on:
 
 jobs:
   BUILD:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Just print
         run: |
