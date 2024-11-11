@@ -6,6 +6,11 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    
+    permissions:
+      id-token: write  # Give permission to generate ID token for authentication
+      contents: read   # Read permissions to fetch the repository content
+      actions: read    # Read permission for actions metadata (for debugging purposes)
 
     steps:
     # Step 1: Checkout code
