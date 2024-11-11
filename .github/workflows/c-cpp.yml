@@ -1,0 +1,16 @@
+name: demo qa
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, windows]
+
+    steps:
+    - name: demo echo
+      run: |
+        echo "this is a demo"
+        echo "Hello $hostname"
+        echo "this is a test to a file" >> output.txt
