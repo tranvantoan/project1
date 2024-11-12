@@ -43,19 +43,19 @@ jobs:
         build-args: |
           DB_INFO=QA
     
-    - uses: Azure/k8s-create-secret@v4
-      with:
-        container-registry-url: ${{ secrets.ACR_REGISTRY_NAME }}
-        container-registry-username: ${{ secrets.AZURE_CLIENT_ID }}
-        container-registry-password: ${{ secrets.AZURE_CLIENT_SECRET }}
-        secret-name: demo-k8s-secret
-    
     - name: Set AKS context
       id: set-context
       uses: azure/aks-set-context@v3
       with:
         resource-group: '${{ secrets.AZURE_RESOURCE_GROUP }}'
         cluster-name: '${{ secrets.AZURE_CLUSTER_NAME }}'
+        
+    - uses: Azure/k8s-create-secret@v4
+      with:
+        container-registry-url: ${{ secrets.ACR_REGISTRY_NAME }}
+        container-registry-username: ${{ secrets.AZURE_CLIENT_ID }}
+        container-registry-password: ${{ secrets.AZURE_CLIENT_SECRET }}
+        secret-name: demo-k8s-secret
     
     - name: Setup kubectl
       id: install-kubectl
