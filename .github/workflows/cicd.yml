@@ -1,4 +1,4 @@
-name: Build and Push Docker Image to Azure Container Registry (ACR)
+name: CI/CD
 
 on:
   workflow_dispatch:
@@ -17,13 +17,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # # Step 2: Log in to Azure using Service Principal
-    # - name: Log in to Azure
-    #   uses: azure/login@v2
-    #   with:
-    #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
-    #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+    # Step 2: Log in to Azure using Service Principal
+    - name: Log in to Azure
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 
     # Step 3: Log in to Azure Container Registry (ACR)
     - name: Log in to Azure Container Registry (ACR)
@@ -42,3 +42,32 @@ jobs:
         tags: ${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}
         build-args: |
           DB_INFO=QA
+    
+    - uses: Azure/k8s-create-secret@v4
+      with:
+        container-registry-url: ${{ secrets.ACR_REGISTRY_NAME }}
+        container-registry-username: ${{ secrets.AZURE_CLIENT_ID }}
+        container-registry-password: ${{ secrets.AZURE_CLIENT_SECRET }}
+        secret-name: demo-k8s-secret
+    
+    - name: Set AKS context
+      id: set-context
+      uses: azure/aks-set-context@v3
+      with:
+        resource-group: '${{ secrets.AZURE_RESOURCE_GROUP }}'
+        cluster-name: '${{ secrets.AZURE_CLUSTER_NAME }}'
+    
+    - name: Setup kubectl
+      id: install-kubectl
+      uses: azure/setup-kubectl@v3
+    
+    - name: Deploy to AKS
+      id: deploy-aks
+      uses: Azure/k8s-deploy@v4
+      with:
+        namespace: 'default'
+        manifests: |
+          deployment.yaml
+        images: '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
+        imagepullsecrets: |
+          demo-k8s-secret
