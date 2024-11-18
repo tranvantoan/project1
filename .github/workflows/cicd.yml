@@ -67,4 +67,6 @@ jobs:
             --source ${{ secrets.ACR_REGISTRY_NAME }}/hello-world:latest \
             --image hello-world:latest \
             --username ${{ secrets.AZURE_CLIENT_ID }} \
-            --password ${{ secrets.AZURE_CLIENT_SECRET }}
+            --password ${{ secrets.AZURE_CLIENT_SECRET }} \
+            --debug
+
