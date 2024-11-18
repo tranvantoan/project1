@@ -63,10 +63,9 @@ jobs:
 
     - name: Copy image from dev to qa ACR
       run: |
+        az account show
+        az acr repository list --name mycontainerregistrydemoqa --output table
         az acr import --name mycontainerregistrydemoqa \
             --source ${{ secrets.ACR_REGISTRY_NAME }}/hello-world:latest \
-            --image hello-world:latest \
-            --username ${{ secrets.AZURE_CLIENT_ID }} \
-            --password ${{ secrets.AZURE_CLIENT_SECRET }} \
-            --debug
+            --image hello-world:latest
 
