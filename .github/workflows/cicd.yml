@@ -52,17 +52,17 @@ jobs:
       id: install-kubectl
       uses: azure/setup-kubectl@v3
     
-    - name: Deploy to AKS
-      id: deploy-aks
-      uses: Azure/k8s-deploy@v4
-      with:
-        namespace: 'default'
-        manifests: |
-          deployment.yaml
-        images: '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
+    # - name: Deploy to AKS
+    #   id: deploy-aks
+    #   uses: Azure/k8s-deploy@v4
+    #   with:
+    #     namespace: 'default'
+    #     manifests: |
+    #       deployment.yaml
+    #     images: '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
 
     - name: Copy image from dev to qa ACR
       run: |
         az acr import --name mycontainerregistrydemoqa \
             --source ${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }} \
-            --image ${{ secrets.ACR_REGISTRY_NAME_QA }}/my-image:${{ github.sha }}
+            --image my-image:${{ github.sha }}
