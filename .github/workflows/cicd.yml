@@ -13,11 +13,11 @@ jobs:
       actions: read    # Read permission for actions metadata (for debugging purposes)
 
     steps:
-    # Step 1: Checkout code
+    # Checkout code
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # Step 2: Log in to Azure using Service Principal
+    # Log in to Azure using Service Principal
     - name: Log in to Azure
       uses: azure/login@v2
       with:
@@ -31,7 +31,7 @@ jobs:
         username: ${{ secrets.AZURE_CLIENT_ID }}
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    # Step 4: Build and push the Docker image to ACR
+    # Build and push the Docker image to ACR
     - name: Build and Push Docker image to ACR
       uses: docker/build-push-action@v6
       with:
@@ -60,3 +60,9 @@ jobs:
         manifests: |
           deployment.yaml
         images: '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
+
+    - name: Copy image from dev to qa ACR
+      run: |
+        az acr import --name mycontainerregistrydemoqa \
+            --source ${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }} \
+            --image ${{ secrets.ACR_REGISTRY_NAME_QA }}/my-image:${{ github.sha }}
