@@ -5,7 +5,7 @@ metadata:
   labels:
     app: test
 spec:
-  replicas: 1  # Number of pod replicas to deploy
+  replicas: 0  # Number of pod replicas to deploy
   selector:
     matchLabels:
       app: test
