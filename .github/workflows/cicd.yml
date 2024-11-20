@@ -54,7 +54,7 @@ jobs:
 
     - name: update variable from secrets
       run: |
-        sed -i 's|${NAME_VALUE}|'"$(echo "${{ secrets.NAME }}" | sed 's/\$/\\\$/g')"|' deployment.yaml
+        sed -i 's|NAME_VALUE|"${{ secrets.NAME }}"|g' deployment.yaml
     
     - name: Deploy to AKS
       id: deploy-aks
