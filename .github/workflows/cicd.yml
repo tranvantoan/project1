@@ -31,42 +31,40 @@ jobs:
         username: ${{ secrets.AZURE_CLIENT_ID }}
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    # # Build and push the Docker image to ACR
-    # - name: Build and Push Docker image to ACR
-    #   uses: docker/build-push-action@v6
-    #   with:
-    #     context: .
-    #     push: true
-    #     tags: ${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}
-    #     build-args: |
-    #       DB_INFO=QA
+    # Build and push the Docker image to ACR
+    - name: Build and Push Docker image to ACR
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}
+        build-args: |
+          DB_INFO=QA
     
-    # - name: Set AKS context
-    #   id: set-context
-    #   uses: azure/aks-set-context@v3
-    #   with:
-    #     resource-group: '${{ secrets.AZURE_RESOURCE_GROUP }}'
-    #     cluster-name: '${{ secrets.AZURE_CLUSTER_NAME }}'
+    - name: Set AKS context
+      id: set-context
+      uses: azure/aks-set-context@v3
+      with:
+        resource-group: '${{ secrets.AZURE_RESOURCE_GROUP }}'
+        cluster-name: '${{ secrets.AZURE_CLUSTER_NAME }}'
     
-    # - name: Setup kubectl
-    #   id: install-kubectl
-    #   uses: azure/setup-kubectl@v3
+    - name: Setup kubectl
+      id: install-kubectl
+      uses: azure/setup-kubectl@v3
     
-    # - name: Deploy to AKS
-    #   id: deploy-aks
-    #   uses: Azure/k8s-deploy@v4
-    #   with:
-    #     namespace: 'default'
-    #     manifests: |
-    #       deployment.yaml
-    #     images: '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
+    - name: Deploy to AKS
+      id: deploy-aks
+      uses: Azure/k8s-deploy@v4
+      with:
+        namespace: 'default'
+        manifests: |
+          deployment.yaml
+        images: |
+          '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
 
-    - name: Copy image from dev to qa ACR
-      run: |
-        az account show
-        az acr list --output table
-        az acr repository list --name mycontainerregistrydemoqa --output table
-        az acr import --name mycontainerregistrydemoqa \
-            --source ${{ secrets.ACR_REGISTRY_NAME }}/hello-world:latest \
-            --image hello-world:latest
+    # - name: Copy image from dev to qa ACR
+    #   run: |
+    #     az acr import --name mycontainerregistrydemoqa \
+    #         --source ${{ secrets.ACR_REGISTRY_NAME }}/hello-world:latest \
+    #         --image hello-world:latest
 

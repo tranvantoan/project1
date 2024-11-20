@@ -5,7 +5,7 @@ metadata:
   labels:
     app: test
 spec:
-  replicas: 0  # Number of pod replicas to deploy
+  replicas: 1
   selector:
     matchLabels:
       app: test
@@ -15,5 +15,5 @@ spec:
         app: test
     spec:
       containers:
-      - name: test
+      - name: appname
         image: mycontainerregistrydemo.azurecr.io/my-image
