@@ -37,7 +37,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}
+        tags: ${{ secrets.ACR_REGISTRY_NAME }}/my-image
         build-args: |
           DB_INFO=QA
     
@@ -60,7 +60,7 @@ jobs:
         manifests: |
           deployment.yaml
         images: |
-          '${{ secrets.ACR_REGISTRY_NAME }}/my-image:${{ github.sha }}'
+          '${{ secrets.ACR_REGISTRY_NAME }}/my-image
 
     # - name: Copy image from dev to qa ACR
     #   run: |
