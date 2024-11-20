@@ -51,6 +51,10 @@ jobs:
     - name: Setup kubectl
       id: install-kubectl
       uses: azure/setup-kubectl@v3
+
+    - name: update variable from secrets
+      run: |
+        sed -i 's|NAME_VALUE|'"$(echo "${{ secrets.NAME }}" deployment.yaml
     
     - name: Deploy to AKS
       id: deploy-aks

@@ -19,4 +19,4 @@ spec:
         image: mycontainerregistrydemo.azurecr.io/my-image
         env:
         - name: NAME
-          value: Toan
+          value: NAME_VALUE
