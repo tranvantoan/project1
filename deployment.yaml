@@ -17,3 +17,6 @@ spec:
       containers:
       - name: appname
         image: mycontainerregistrydemo.azurecr.io/my-image
+        env:
+        - name: NAME
+          value: Toan
