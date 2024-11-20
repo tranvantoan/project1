@@ -11,5 +11,5 @@ COPY hello.bash /hello.bash
 
 RUN chmod +x /hello.bash
 
-CMD ["/hello.bash $NAME"]
+CMD ["bash", "-c", "/hello.bash $NAME"]
 
