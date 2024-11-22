@@ -6,7 +6,7 @@ on:
   #     - '*'
   workflow_dispatch:
     inputs:
-      env:
+      environment:
         description: 'Env'
         type: environment
 
@@ -17,11 +17,11 @@ jobs:
     #   STATUS: "OK"
     #   TARGET_ID: ${{ env.ID }}
     runs-on: ubuntu-latest
-    environment: ${{ inputs.env}}
+    environment: ${{ inputs.environment }}
     steps:
       - name: Echo NAME1
         run: |
-          echo "Name1 is: ${{ env.NAME1 }}"
+          echo "Name1 is: ${{ vars.NAME1 }}"
       # - name: Checkout
       #   uses: actions/checkout@v4
       #   with:
