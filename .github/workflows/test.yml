@@ -17,6 +17,7 @@ jobs:
     #   STATUS: "OK"
     #   TARGET_ID: ${{ env.ID }}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.env}}
     steps:
       - name: Echo NAME1
         run: |
