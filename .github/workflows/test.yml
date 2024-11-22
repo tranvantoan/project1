@@ -12,10 +12,10 @@ on:
 
 jobs:
   TEST:
-    env:
-      ID: 1
-      STATUS: "OK"
-      TARGET_ID: ${{ env.ID }}
+    # env:
+    #   ID: 1
+    #   STATUS: "OK"
+    #   TARGET_ID: ${{ env.ID }}
     runs-on: ubuntu-latest
     steps:
       - name: Echo NAME1
