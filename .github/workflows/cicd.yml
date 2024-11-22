@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
 
   push:
+    paths:
+      - '.github/workflows/cicd.yml'
 
 jobs:
   build-and-push:
