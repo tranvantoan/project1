@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Echo NAME1
         run: |
-          echo "Name1 is: ${{ vars.NAME1 }}
+          echo "Name1 is: ${{ vars.NAME1 }}"
       # - name: Checkout
       #   uses: actions/checkout@v4
       #   with:
