@@ -14,7 +14,6 @@ jobs:
   BUILD:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - name: Just print
         run: |
           echo "Hello ${{ inputs.name }}"
