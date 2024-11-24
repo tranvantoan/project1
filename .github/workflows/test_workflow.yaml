@@ -9,6 +9,13 @@ on:
         required: true
         default: Toan
 
+  workflow_call:  
+    inputs:
+      name:
+        description: Name
+        type: string
+        required: true
+        default: Toan
 
 jobs:
   BUILD:
