@@ -1,13 +1,14 @@
 name: Test workflow
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       name:
         description: Name
         type: string
         required: true
         default: Toan
+
 
 jobs:
   BUILD:
