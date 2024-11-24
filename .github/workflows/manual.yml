@@ -12,10 +12,5 @@ on:
 jobs:
 
   greet:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
     - name: Call test_workflow
       uses: ./.github/workflows/test_workflow.yaml
