@@ -1,16 +1,14 @@
-name: Manual workflow
+name: Caller workflow
 
 on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'Person to greet'
-        default: 'World'
+        description: "Person to greet"
+        default: "World"
         required: true
         type: string
 
 jobs:
-
   greet:
-    - name: Call test_workflow
-      uses: ./.github/workflows/test_workflow.yaml
+    uses: ./.github/workflows/test_workflow.yaml
