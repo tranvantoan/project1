@@ -1,24 +1,27 @@
 name: test
 
 on:
-  push:
-    tags:
-      - '*'
+  # push:
+  #   tags:
+  #     - '*'
   workflow_dispatch:
     inputs:
-      status:
-        description: 'status of do something'
-        type: number
-        default: 0
+      environment:
+        description: 'Env'
+        type: environment
 
 jobs:
   TEST:
-    env:
-      ID: 1
-      STATUS: "OK"
-      TARGET_ID: ${{ env.ID }}
+    # env:
+    #   ID: 1
+    #   STATUS: "OK"
+    #   TARGET_ID: ${{ env.ID }}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
+      - name: Echo NAME1
+        run: |
+          echo "Name1 is: ${{ vars.NAME1 }}"
       # - name: Checkout
       #   uses: actions/checkout@v4
       #   with:
@@ -32,26 +35,26 @@ jobs:
       # - name: Print the tag
       #   run: |
       #     echo "Tag is: ${{ steps.get_tag.outputs.tag }}"
-      - name: Do something
-        id: dosomething
-        continue-on-error: true
-        run: |
-          echo "Value of TARGET_ID: ${{ env.TARGET_ID }}"
-          exit ${{ inputs.status }}
+      # - name: Do something
+      #   id: dosomething
+      #   continue-on-error: true
+      #   run: |
+      #     echo "Value of TARGET_ID: ${{ env.TARGET_ID }}"
+      #     exit ${{ inputs.status }}
 
-      - name: Handle OK
-        if: steps.dosomething.outcome == 'success'
-        run: |
-          echo "ID=2" >> $GITHUB_ENV
-          echo "STATUS=OK" >> $GITHUB_ENV
-      - name: Hanle NOT OK
-        if: steps.dosomething.outcome == 'failure'
-        run: |
-          echo "ID=1" >> $GITHUB_ENV
-          echo "STATUS=NOT OK" >> $GITHUB_ENV
-      - name: Update something
-        run: |
-          echo "ID is: ${{ env.ID }} , STATUS: ${{ env.STATUS }}"
+      # - name: Handle OK
+      #   if: steps.dosomething.outcome == 'success'
+      #   run: |
+      #     echo "ID=2" >> $GITHUB_ENV
+      #     echo "STATUS=OK" >> $GITHUB_ENV
+      # - name: Hanle NOT OK
+      #   if: steps.dosomething.outcome == 'failure'
+      #   run: |
+      #     echo "ID=1" >> $GITHUB_ENV
+      #     echo "STATUS=NOT OK" >> $GITHUB_ENV
+      # - name: Update something
+      #   run: |
+      #     echo "ID is: ${{ env.ID }} , STATUS: ${{ env.STATUS }}"
       # - uses: olegtarasov/get-tag@v2.1.3
       #   id: tagName
 
