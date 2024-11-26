@@ -19,4 +19,7 @@ spec:
         image: mycontainerregistrydemo.azurecr.io/my-image
         env:
         - name: NAME
-          value: NAME_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: NAME
