@@ -56,9 +56,9 @@ jobs:
       id: install-kubectl
       uses: azure/setup-kubectl@v3
 
-    - name: update variable from secrets
-      run: |
-        sed -i 's|NAME_VALUE|"${{ secrets.NAME }}"|g' deployment.yaml
+    # - name: update variable from secrets
+    #   run: |
+    #     sed -i 's|NAME_VALUE|"${{ secrets.NAME }}"|g' deployment.yaml
     - name: create K8s secret
       run: |
         kubectl create secret generic db-secret \
