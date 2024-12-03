@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "Name1 is: ${{ vars.NAME1 }}"
           echo "Name is: ${{ secrets.NAME }}"
-          echo "Secrets is: ${{ secrets.TEST_RECRET }}"
+          echo "Secrets is: ${{ secrets.TEST_SECRET }}"
       # - name: Checkout
       #   uses: actions/checkout@v4
       #   with:
