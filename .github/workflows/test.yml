@@ -4,11 +4,11 @@ on:
   push:
     tags:
       - '*'
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Env'
-        type: environment
+  # workflow_dispatch:
+  #   inputs:
+  #     environment:
+  #       description: 'Env'
+  #       type: environment
 
 jobs:
   TEST:
@@ -22,6 +22,7 @@ jobs:
       - name: Get tags
         run: |
           echo "ref is: ${{ github.ref_name}}"
+          echo "${{ github.event.base_ref }}"
       - name: Checkout
         uses: actions/checkout@v4
         with:
