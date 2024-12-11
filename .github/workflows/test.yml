@@ -1,9 +1,9 @@
 name: test
 
 on:
-  # push:
-  #   tags:
-  #     - '*'
+  push:
+    tags:
+      - '*'
   workflow_dispatch:
     inputs:
       environment:
@@ -17,13 +17,11 @@ jobs:
     #   STATUS: "OK"
     #   TARGET_ID: ${{ env.ID }}
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    # environment: ${{ inputs.environment }}
     steps:
-      - name: Echo NAME1
+      - name: Get tags
         run: |
-          echo "Name1 is: ${{ vars.NAME1 }}"
-          echo "Name is: ${{ secrets.NAME }}"
-          echo "Secrets is: ${{ secrets.TEST_SECRET }}"
+          echo "ref: ${{ github.ref_name}}"
       # - name: Checkout
       #   uses: actions/checkout@v4
       #   with:
