@@ -2,15 +2,26 @@ name: Matrix Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      server:
+        description: 'Choose server (a or b)'
+        required: true
+        default: 'a'
+        type: choice
+        options:
+          - a
+          - b
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SERVER: ${{ github.event.inputs.server == 'a' && 'abc' || 'bcd' }}
     strategy:
       matrix:
         task: [task1, task2]
     steps:
-      - name: Echo task name
+      - name: Echo task name in ${{ env.SERVER }}
         run: echo "Running ${{ matrix.task }}"
 
       - name: Fail for task1
