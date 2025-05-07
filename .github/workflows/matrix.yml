@@ -13,21 +13,28 @@ on:
           - b
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
     env:
       SERVER: ${{ github.event.inputs.server == 'a' && 'abc' || 'bcd' }}
     strategy:
       matrix:
-        task: [task1, task2]
+        task: 
+          - task1
+          - task2
+          - task3
+      fail-fast: false
+      max-parallel: 1
     steps:
       - name: Echo task name in ${{ env.SERVER }}
         run: echo "Running ${{ matrix.task }}"
-
       - name: Fail for task1
         if: ${{ matrix.task == 'task1' }}
         run: |
-          sleep 10
           exit 1
+      - name: Delay for task2
+        if: ${{ matrix.task == 'task2' }}
+        run: |
+          sleep 10
 
     timeout-minutes: 30
