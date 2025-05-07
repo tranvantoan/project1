@@ -1,0 +1,14 @@
+name: Matrix Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        task: [task1, task2]
+    steps:
+      - name: Echo task name
+        run: echo "Running ${{ matrix.task }}"
