@@ -12,3 +12,9 @@ jobs:
     steps:
       - name: Echo task name
         run: echo "Running ${{ matrix.task }}"
+
+      - name: Fail for task1
+        if: ${{ matrix.task == 'task1' }}
+        run: exit 1
+
+    timeout-minutes: 30
