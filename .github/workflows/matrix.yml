@@ -20,10 +20,9 @@ on:
           - all
           - job1
           - job2
-
 jobs:
   job1:
-    if: inputs.job == 'all' || inputs.job == github.job
+    if: inputs.job == 'all' || inputs.job == 'job1'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -40,7 +39,8 @@ jobs:
       - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
         run: echo "Running ${{ matrix.task }}"
   job2:
-    if: inputs.job == 'all' || inputs.job == github.job
+    if: inputs.job == 'all' || inputs.job == 'job2'
+    needs: job1
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -55,5 +55,5 @@ jobs:
       max-parallel: 1
     steps:
       - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
-        run: echo "Running ${{ matrix.task }}"
+        run: sleep 60 && echo "Done"
     
