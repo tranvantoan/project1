@@ -9,8 +9,22 @@ on:
         default: 'a'
         type: choice
         options:
-          - a
-          - b
+          - aabc
+          - babc
+          - cabc
+          - eabc
+          - fabc
+          - gabc
+          - habc
+          - iabc
+          - jabc
+          - kabc
+          - labc
+          - mabc
+          - nabc
+          - oabc
+          - pabc
+          - qabc
 
 jobs:
   run:
