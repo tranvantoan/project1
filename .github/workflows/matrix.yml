@@ -25,21 +25,11 @@ jobs:
     if: inputs.job == 'all' || inputs.job == 'job1'
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      SERVER: ${{ github.event.inputs.server == 'a' && 'abc' || 'bcd' }}
-    strategy:
-      matrix:
-        task: 
-          - task1
-          - task2
-          - task3
-      fail-fast: false
-      max-parallel: 1
     steps:
-      - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
-        run: echo "Running ${{ matrix.task }}"
+      - name: Echo task name
+        run: exit -1
   job2:
-    if: ( success() ) && ( inputs.job == 'all' || inputs.job == 'job2' )
+    if: inputs.job == 'all' || inputs.job == 'job2' 
     needs: job1
     runs-on: ubuntu-latest
     timeout-minutes: 30
