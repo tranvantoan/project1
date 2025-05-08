@@ -44,4 +44,12 @@ jobs:
     steps:
       - name: job name is ${{ github.job }}
         run: sleep 60 && echo "Done"
-    
+  job4:
+    if: always()
+    needs: job1
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: sucess value is ${{ success() }} , failure value is ${{ failure() }} , cancelled value is ${{ cancelled() }}
+        run: echo "Success value is: ${{ success() }} , failure value is: ${{ failure() }} , cancelled value is: ${{ cancelled() }}"
+  
