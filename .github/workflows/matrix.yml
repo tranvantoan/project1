@@ -51,5 +51,5 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: sucess value is ${{ success() }} , failure value is ${{ failure() }} , cancelled value is ${{ cancelled() }}
-        run: echo "Success value is: ${{ success() }} , failure value is: ${{ failure() }} , cancelled value is: ${{ cancelled() }}"
+        run: echo "Success"
   
