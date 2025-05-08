@@ -9,26 +9,40 @@ on:
         default: 'a'
         type: choice
         options:
-          - aabc
-          - babc
-          - cabc
-          - eabc
-          - fabc
-          - gabc
-          - habc
-          - iabc
-          - jabc
-          - kabc
-          - labc
-          - mabc
-          - nabc
-          - oabc
-          - pabc
-          - qabc
+          - a
+          - b
+      job:
+        description: 'Choose job'
+        required: true
+        default: 'job1'
+        type: choice
+        options:
+          - all
+          - job1
+          - job2
 
 jobs:
-  run:
+  job1:
+    if: inputs.job == 'all' || inputs.job == '${{ github.job }}'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SERVER: ${{ github.event.inputs.server == 'a' && 'abc' || 'bcd' }}
+    strategy:
+      matrix:
+        task: 
+          - task1
+          - task2
+          - task3
+      fail-fast: false
+      max-parallel: 1
+    steps:
+      - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
+        run: echo "Running ${{ matrix.task }}"
+  job2:
+    if: inputs.job == 'all' || inputs.job == '${{ github.job }}'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       SERVER: ${{ github.event.inputs.server == 'a' && 'abc' || 'bcd' }}
     strategy:
@@ -42,13 +56,4 @@ jobs:
     steps:
       - name: Echo task name in ${{ env.SERVER }}
         run: echo "Running ${{ matrix.task }}"
-      - name: Fail for task1
-        if: ${{ matrix.task == 'task1' }}
-        run: |
-          exit 1
-      - name: Delay for task2
-        if: ${{ matrix.task == 'task2' }}
-        run: |
-          sleep 10
-
-    timeout-minutes: 30
+    
