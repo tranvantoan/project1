@@ -46,7 +46,9 @@ jobs:
         run: sleep 60 && echo "Done"
   job4:
     if: always()
-    needs: job1
+    needs: 
+      - job1
+      - job2
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
