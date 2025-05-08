@@ -50,6 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: sucess value is ${{ success() }} , failure value is ${{ failure() }} , cancelled value is ${{ cancelled() }}
-        run: echo "Success"
+      - name: job name is ${{ needs.job1.result }}
+        run: echo "Success ${{ needs.job1.result }}"
   
