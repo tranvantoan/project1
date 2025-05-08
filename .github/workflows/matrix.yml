@@ -39,7 +39,7 @@ jobs:
       - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
         run: echo "Running ${{ matrix.task }}"
   job2:
-    if: ( !cancelled() ) && inputs.job == 'all' || inputs.job == 'job2'
+    if: ( success() ) && ( inputs.job == 'all' || inputs.job == 'job2' )
     needs: job1
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -55,5 +55,13 @@ jobs:
       max-parallel: 1
     steps:
       - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
+        run: sleep 20 && echo "Done"
+  job3:
+    if: ( !cancelled() ) && (inputs.job == 'all' || inputs.job == 'job3')
+    needs: job2
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: job name is ${{ github.job }}
         run: sleep 60 && echo "Done"
     
