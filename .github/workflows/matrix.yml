@@ -27,25 +27,15 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Echo task name
-        run: exit -1
+        run: exit 0
   job2:
     if: inputs.job == 'all' || inputs.job == 'job2' 
     needs: job1
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      SERVER: ${{ github.event.inputs.server == 'a' && 'abc' || 'bcd' }}
-    strategy:
-      matrix:
-        task: 
-          - task1
-          - task2
-          - task3
-      fail-fast: false
-      max-parallel: 1
     steps:
-      - name: Echo task name in ${{ env.SERVER }} and job name is ${{ github.job }}
-        run: sleep 20 && echo "Done"
+      - name: Echo task name
+        run: sleep 60
   job3:
     if: ( !cancelled() ) && (inputs.job == 'all' || inputs.job == 'job3')
     needs: job2
